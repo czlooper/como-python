@@ -1,10 +1,10 @@
 import streamlit as st
-import streamlit_authenticator as stauth
-import yaml
-from yaml.loader import SafeLoader
+#import streamlit_authenticator as stauth
+#import yaml
 import pandas as pd
 import numpy as np
-from io import StringIO
+# from yaml.loader import SafeLoader
+# from io import StringIO
 
 
 #with open('../config.yaml') as file:
