@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+st.header("Moje první aplikace")
 st.header("Vypočtu ti obvod a obsah či objem, plochu a součet hran")
 
 st.markdown("---")
