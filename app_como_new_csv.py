@@ -37,7 +37,7 @@ def podminka(radek):
     elif (radek["ID_ctecky"] == 10708) & (df_pruchod.loc[radek.name+1, "ID_ctecky"] == 10708): # pokud ID_ctecky je odchod a příští průchod je také odchod
         return "Odchod - Chyba - Následující návštěvě chybí příchod"
     elif ((radek.name) == 0) & (df_pruchod.loc[radek.name, "ID_ctecky"] == 10708): # pokud ID_ctecky je odchod a zároveň se jedná o první průchod
-        return "Odchod"
+        return "Odchod - Chyba - První průchod není příchod"
     elif (radek["ID_ctecky"] == 10708) & (df_pruchod.loc[radek.name+1, "ID_ctecky"] == 10707): # pokud ID_ctecky je odchod a příští průchod je příchod
         return "Odchod"
     else:
