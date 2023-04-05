@@ -96,6 +96,6 @@ if uploaded_file is not None:
         st.markdown("---")
         st.text("Chybář")
         st.dataframe(df_chybar_view, width = 1000) # výpis chybáře
-        st.markdown("---")
-        st.text("Podrobný výpis")
-        st.dataframe(df_souhrn_pruchodu_all_view, width = 1000) # vypiš průchody
+    st.markdown("---")
+    st.text("Podrobný výpis")
+    st.dataframe(df_souhrn_pruchodu_all_view, width = 1000) # vypiš průchody
