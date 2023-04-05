@@ -25,17 +25,19 @@ def podminka(radek):
     if ((radek.name + 1) >= len(df_pruchod)) & (df_pruchod.loc[radek.name, "ID_ctecky"] != 10707): # pokud jde o poslední řádek a ID_ctecky není Příchod
         return "Odchod"
     elif ((radek.name + 1) >= len(df_pruchod)) & (df_pruchod.loc[radek.name, "ID_ctecky"] != 10708): # pokud jde o poslední řádek a ID_ctecky není Odchod
-        return "Chyba - Chybí odchod"
+        return "Příchod - Chyba - Chybí odchod"
     elif (radek["ID_ctecky"] == 10707) & (df_pruchod.loc[radek.name+1, "ID_ctecky"] == 10708) & (df_pruchod.loc[radek.name+1, "Datum"] == df_pruchod.loc[radek.name, "Datum"]): # pokud v rámci jednoho dne ID_ctecky je příchod a příští průchod je odchod 
         return "Příchod"
     elif (radek["ID_ctecky"] == 10707) & (df_pruchod.loc[radek.name+1, "ID_ctecky"] == 10708) & (df_pruchod.loc[radek.name+1, "Datum"] != df_pruchod.loc[radek.name, "Datum"]): # pokud v rámci ruznych dnu ID_ctecky je příchod a příští průchod je odchod
-        return "Chyba - Chybí odchod a následující návštěvě chybí příchod"
+        return "Příchod - Chyba - Chybí odchod a následující návštěvě chybí příchod"
     elif (radek["ID_ctecky"] == 10707) & (df_pruchod.loc[radek.name+1, "ID_ctecky"] == 10707) & (df_pruchod.loc[radek.name+1, "Datum"] == df_pruchod.loc[radek.name, "Datum"]): # pokud v rámci jednoho dne ID_ctecky je příchod a příští průchod je také příchod
-        return "Chyba - Chybí odchod"
+        return "Příchod - Chyba - Chybí odchod"
     elif (radek["ID_ctecky"] == 10707) & (df_pruchod.loc[radek.name+1, "ID_ctecky"] == 10707) & (df_pruchod.loc[radek.name+1, "Datum"] != df_pruchod.loc[radek.name, "Datum"]): # pokud v rámci ruznych dnu ID_ctecky je příchod a příští průchod je také příchod
-        return "Chyba - Chybí odchod"
+        return "Příchod - Chyba - Chybí odchod"
     elif (radek["ID_ctecky"] == 10708) & (df_pruchod.loc[radek.name+1, "ID_ctecky"] == 10708): # pokud ID_ctecky je odchod a příští průchod je také odchod
-        return "Chyba - Následující návštěvě chybí příchod"
+        return "Odchod - Chyba - Následující návštěvě chybí příchod"
+    elif ((radek.name) == 0) & (df_pruchod.loc[radek.name, "ID_ctecky"] == 10708): # pokud ID_ctecky je odchod a zároveň se jedná o první průchod
+        return "Odchod"
     elif (radek["ID_ctecky"] == 10708) & (df_pruchod.loc[radek.name+1, "ID_ctecky"] == 10707): # pokud ID_ctecky je odchod a příští průchod je příchod
         return "Odchod"
     else:
