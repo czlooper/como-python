@@ -41,18 +41,17 @@ def podminka(radek):
     else:
         return "Logická chyba - přehodnotit podmínky"
 
-uzivatel = "345"
+#uzivatel = st.number_input("Zadejte číslo karty klienta", key="klic1", step=1)
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file, sep = "\t", header = None, names = ["Stav", "Typ_pruchodu", "Prazdna1", "Skupina","Cislo_karty", "Prazdna2", "Skupina2", "Umisteni", "Termin", "Cislo_karty_interni", "Zpusob_zapisu", "ID_ctecky", "Prazdna3", "Prazdna4", "ID_karty_externi"])
-#   df = pd.read_csv(uploaded_file, encoding='Latin2', sep = "\t", header = None, names = ["Stav", "Typ_pruchodu", "Prazdna1", "Skupina","Cislo_karty", "Prazdna2", "Skupina2", "Umisteni", "Termin", "Cislo_karty_interni", "Zpusob_zapisu", "ID_ctecky", "Prazdna3", "Prazdna4", "ID_karty_externi"])
+    df = pd.read_csv(uploaded_file, encoding='Latin2', sep = "\t", header = None, names = ["Stav", "Typ_pruchodu", "Prazdna1", "Skupina","Cislo_karty", "Prazdna2", "Skupina2", "Umisteni", "Termin", "Cislo_karty_interni", "Zpusob_zapisu", "ID_ctecky", "Prazdna3", "Prazdna4", "ID_karty_externi"])
+
     # Rozdělení Termin na Datum a Cas
-    print(df)
     df[['Datum', 'Cas']] = df['Termin'].str.split(' ', expand=True)
-    print(df)
+
     # Výběr dat uživatele (karty)
-    uzivatel = int(input("Zadejte číslo karty k vyhodnocení: "))
-    uzivatel = int("345")
+    #uzivatel = int(input("Zadejte číslo karty k vyhodnocení: "))
+    #uzivatel = int("345")
     karty = set(df['Cislo_karty'].tolist())
     uzivatel = st.selectbox("Vyberte ze seznamu číslo karty", karty)
     df_karta = df.loc[df["Cislo_karty"] == uzivatel,["Cislo_karty", "ID_ctecky", "Datum", "Cas"]].reset_index(drop=True)
@@ -88,13 +87,13 @@ if uploaded_file is not None:
     Stravene_minuty = round(((df_souhrn_pruchodu['Cas_int'].sum()) - (Stravene_hodiny))*60)
 
     # výpis informačního řádku
-#   st.text(f"Uživatel s kartou {df_souhrn_pruchodu.iloc[0,0]} strávil v COMO {Stravene_hodiny} hodin a {Stravene_minuty} minut. \nZáznamy obsahují {n} chyb.\n")
+    st.text(f"Uživatel s kartou {df_souhrn_pruchodu.iloc[0,0]} strávil v COMO {Stravene_hodiny} hodin a {Stravene_minuty} minut. \nZáznamy obsahují {n} chyb.\n")
     if n > 0: # pokud existují chyby
         # pd.set_option('display.max_rows', None) # zruší omezení výpisu počtu řádků
         # pd.set_option('display.max_colwidth', None) # zruší omezení výpisu počtu sloupců
-#        st.markdown("---")
-#        st.text("Chybář")
-#        st.dataframe(df_chybar_view, width = 1000) # výpis chybáře
-#        st.markdown("---")
-#        st.text("Podrobný výpis")
-#        st.dataframe(df_souhrn_pruchodu_all_view, width = 1000) # vypiš průchody
+        st.markdown("---")
+        st.text("Chybář")
+        st.dataframe(df_chybar_view, width = 1000) # výpis chybáře
+        st.markdown("---")
+        st.text("Podrobný výpis")
+        st.dataframe(df_souhrn_pruchodu_all_view, width = 1000) # vypiš průchody
